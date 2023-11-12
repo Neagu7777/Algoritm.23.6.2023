@@ -1,0 +1,83 @@
+Создайте структуру DynamicArray
+Реализуйте два пути создания:
+DynamicArray() - по умолчанию size = 10
+DynamicArray(capacity) - size = capacity
+
+Реализуйте методы:
+add(data) - добавляет в конец
+remove() - удаляет последний
+removeAt(index) - удаляет по индексу
+growSize() - увеличивает размер
+set(index, data) - изменяет элемент
+clean() - удаляет все элементы
+contains(data) - проверяет существует ли элемент
+isEmpty() - вернет false, если в структуре есть элемент
+
+
+пример реализации структуры DynamicArray на языке Java:
+
+public class DynamicArray {
+    private static final int DEFAULT_CAPACITY = 10;
+    private Object[] array;
+    private int size;
+
+    public DynamicArray() {
+        this(DEFAULT_CAPACITY);
+    }
+
+    public DynamicArray(int capacity) {
+        this.array = new Object[capacity];
+        this.size = 0;
+    }
+
+    public void add(T data) {
+        if (size == array.length) {
+            growSize();
+        }
+        array[size++] = data;
+    }
+
+    public void remove() {
+        if (size > 0) {
+            size--;
+        }
+    }
+
+    public void removeAt(int index) {
+        if (index >= 0 && index < size) {
+            System.arraycopy(array, index + 1, array, index, size - index - 1);
+            size--;
+        }
+    }
+
+    private void growSize() {
+        int newCapacity = array.length * 2;
+        array = java.util.Arrays.copyOf(array, newCapacity);
+    }
+
+    public void set(int index, T data) {
+        if (index >= 0 && index < size) {
+            array[index] = data;
+        }
+    }
+
+    public void clean() {
+        size = 0;
+    }
+
+    public boolean contains(T data) {
+        for (int i = 0; i < size; i++) {
+            if (array[i].equals(data)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+}
+
+Этот код создает простую динамическую структуру данных, которая автоматически расширяется при необходимости. 
+Методы add, remove, removeAt, growSize, set, clean, contains и isEmpty выполняют соответствующие операции с массивом.
